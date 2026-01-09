@@ -117,4 +117,84 @@
     <!-- Errors -->
     <string name="error_generic">Something went wrong. Please try again.</string>
     <string name="error_network">Please check your internet connection.</string>
+
+    <!-- Landing Page - Navigation -->
+    <string name="landing_sign_in">Sign In</string>
+    <string name="landing_how_it_works">How It Works</string>
+    <string name="about">About</string>
+
+    <!-- Landing Page - Hero Section -->
+    <string name="landing_saved_by_families">Saved by OFW families</string>
+    <string name="landing_active_users">Active users</string>
+    <string name="landing_providers_compared">Providers compared</string>
+
+    <!-- Landing Page - Testimonials Section -->
+    <string name="landing_real_stories">Real Stories</string>
+    <string name="landing_testimonials_title">Voices from Our OFW Community</string>
+    <string name="landing_testimonials_subtitle">Hear from fellow OFWs who are saving more for their families back home.</string>
+    <string name="landing_saves">Saves</string>
+
+    <!-- Landing Page - Stats Bar -->
+    <string name="landing_ofw_families">OFW Families</string>
+    <string name="landing_total_saved">Total Saved</string>
+    <string name="landing_avg_rating">Avg. Rating</string>
+    <string name="landing_countries">Countries</string>
+
+    <!-- Landing Page - Comparison Table -->
+    <string name="landing_comparison_eyebrow">Why Choose Us</string>
+    <string name="landing_comparison_title">AI Padala vs Traditional Apps</string>
+    <string name="landing_feature">Feature</string>
+    <string name="landing_others">Others</string>
+
+    <!-- Landing Page - How It Works -->
+    <string name="landing_how_it_works_eyebrow">Simple Process</string>
+    <string name="landing_how_it_works_subtitle">Send money home in just 3 easy steps</string>
+    <string name="landing_step1_title">Sign Up</string>
+    <string name="landing_step1_desc">2 minutes lang. Valid ID, verified ka na agad. Quick, easy, secure.</string>
+    <string name="landing_step2_title">Enter Amount</string>
+    <string name="landing_step2_desc">Piliin kung magkano. See the exact PHP your family will receive.</string>
+    <string name="landing_step3_title">Send!</string>
+    <string name="landing_step3_desc">Confirm, click send — they receive it instantly. Tapos na!</string>
+
+    <!-- Landing Page - Why Trust Us -->
+    <string name="landing_trust_eyebrow">Your Security Matters</string>
+    <string name="landing_why_trust_us">Why Trust Us</string>
+    <string name="landing_trust_subtitle">Built with security and reliability at our core</string>
+    <string name="landing_trust_security_title">Bank-Level Security</string>
+    <string name="landing_trust_security_desc">BSP-regulated partners, 256-bit encryption. Your money is protected.</string>
+    <string name="landing_trust_speed_title">Instant Transfers</string>
+    <string name="landing_trust_speed_desc">Money arrives in minutes. Direct to GCash, Maya, bank, or cash pickup.</string>
+    <string name="landing_trust_rates_title">Best Rates Guaranteed</string>
+    <string name="landing_trust_rates_desc">AI finds the lowest fees. Real-time comparison across 10+ providers.</string>
+    <string name="landing_trust_support_title">24/7 Tagalog Support</string>
+    <string name="landing_trust_support_desc">We\'re here anytime. Chat support in English or Tagalog.</string>
+
+    <!-- Landing Page - Bottom CTA -->
+    <string name="landing_cta_promo">Limited Time: First Transfer FREE</string>
+    <string name="landing_cta_title">Ready to Send More to Your Family?</string>
+    <string name="landing_cta_subtitle">Join 12,847 OFWs who save an average of ₱450 per transfer.</string>
+    <string name="landing_cta_secondary">Your first send is completely free — walang fee, walang catch.</string>
+    <string name="landing_cta_button">Start Sending Now — It\'s Free</string>
+
+    <!-- Landing Page - Footer -->
+    <string name="landing_footer_tagline">Helping OFWs send more to their loved ones back home.</string>
+    <string name="landing_learn">Learn</string>
+    <string name="landing_company">Company</string>
+    <string name="landing_usd_to_php">USD to PHP</string>
+    <string name="landing_aud_to_php">AUD to PHP</string>
+    <string name="landing_sar_to_php">SAR to PHP</string>
+    <string name="landing_aed_to_php">AED to PHP</string>
+    <string name="landing_sgd_to_php">SGD to PHP</string>
+    <string name="landing_gbp_to_php">GBP to PHP</string>
+    <string name="landing_financial_literacy">Financial Literacy</string>
+    <string name="landing_scam_protection">Scam Protection</string>
+    <string name="landing_budgeting_tips">Budgeting Tips</string>
+    <string name="landing_retirement_guide">Retirement Guide</string>
+    <string name="landing_about_us">About Us</string>
+    <string name="landing_contact">Contact</string>
+    <string name="landing_careers">Careers</string>
+    <string name="landing_press">Press</string>
+    <string name="landing_partners">Partners</string>
+    <string name="landing_payout_methods">Payout Methods</string>
+    <string name="landing_copyright">© 2026 AI Padala. All rights reserved.</string>
 </resources>

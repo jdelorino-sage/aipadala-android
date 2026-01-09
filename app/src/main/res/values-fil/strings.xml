@@ -57,4 +57,84 @@
 
     <!-- Offline -->
     <string name="offline_banner">Offline ka. Pinapakita ang cached rates.</string>
+
+    <!-- Landing Page - Navigation -->
+    <string name="landing_sign_in">Mag-sign In</string>
+    <string name="landing_how_it_works">Paano Gumagana</string>
+    <string name="about">Tungkol</string>
+
+    <!-- Landing Page - Hero Section -->
+    <string name="landing_saved_by_families">Natipid ng OFW families</string>
+    <string name="landing_active_users">Aktibong users</string>
+    <string name="landing_providers_compared">Providers na ikumpara</string>
+
+    <!-- Landing Page - Testimonials Section -->
+    <string name="landing_real_stories">Mga Kuwento ng OFW</string>
+    <string name="landing_testimonials_title">Bakit Kami ang Pinipili Nila</string>
+    <string name="landing_testimonials_subtitle">Makinig sa mga kapwa OFW na mas nakakatipid para sa kanilang pamilya sa Pilipinas.</string>
+    <string name="landing_saves">Nakatipid</string>
+
+    <!-- Landing Page - Stats Bar -->
+    <string name="landing_ofw_families">OFW Families</string>
+    <string name="landing_total_saved">Kabuuang Natipid</string>
+    <string name="landing_avg_rating">Ave. Rating</string>
+    <string name="landing_countries">Mga Bansa</string>
+
+    <!-- Landing Page - Comparison Table -->
+    <string name="landing_comparison_eyebrow">Bakit Kami</string>
+    <string name="landing_comparison_title">AI Padala vs Ibang Apps</string>
+    <string name="landing_feature">Feature</string>
+    <string name="landing_others">Iba</string>
+
+    <!-- Landing Page - How It Works -->
+    <string name="landing_how_it_works_eyebrow">Madaling Proseso</string>
+    <string name="landing_how_it_works_subtitle">Magpadala sa 3 madaling hakbang lang</string>
+    <string name="landing_step1_title">Mag-sign Up</string>
+    <string name="landing_step1_desc">2 minutes lang. Valid ID, verified ka na agad. Quick, easy, secure.</string>
+    <string name="landing_step2_title">Ilagay ang Halaga</string>
+    <string name="landing_step2_desc">Piliin kung magkano. Makita ang eksaktong PHP na matatanggap ng pamilya mo.</string>
+    <string name="landing_step3_title">Ipadala!</string>
+    <string name="landing_step3_desc">I-confirm, i-click send — matatanggap nila agad. Tapos na!</string>
+
+    <!-- Landing Page - Why Trust Us -->
+    <string name="landing_trust_eyebrow">Mahalaga ang Seguridad Mo</string>
+    <string name="landing_why_trust_us">Bakit Kami Pagkatiwalaan</string>
+    <string name="landing_trust_subtitle">Ginawa nang may seguridad at pagiging maaasahan sa puso</string>
+    <string name="landing_trust_security_title">Bank-Level na Seguridad</string>
+    <string name="landing_trust_security_desc">BSP-regulated partners, 256-bit encryption. Protektado ang pera mo.</string>
+    <string name="landing_trust_speed_title">Instant na Padala</string>
+    <string name="landing_trust_speed_desc">Dumadating ang pera sa loob ng ilang minuto. Direkta sa GCash, Maya, bank, o cash pickup.</string>
+    <string name="landing_trust_rates_title">Pinakamahusay na Rate</string>
+    <string name="landing_trust_rates_desc">Hinahanap ng AI ang pinakamababang fees. Real-time na pagkumpara sa 10+ providers.</string>
+    <string name="landing_trust_support_title">24/7 Tagalog Support</string>
+    <string name="landing_trust_support_desc">Andito kami kahit kelan. Chat support sa English o Tagalog.</string>
+
+    <!-- Landing Page - Bottom CTA -->
+    <string name="landing_cta_promo">Limitadong Oras: LIBRE ang Unang Padala</string>
+    <string name="landing_cta_title">Handa ka na bang Magpadala ng Mas Malaki sa Pamilya Mo?</string>
+    <string name="landing_cta_subtitle">Sumali sa 12,847 OFW na nakakatipid ng average na ₱450 kada padala.</string>
+    <string name="landing_cta_secondary">Libre ang unang padala mo — walang fee, walang catch.</string>
+    <string name="landing_cta_button">Magsimulang Magpadala Ngayon — Libre!</string>
+
+    <!-- Landing Page - Footer -->
+    <string name="landing_footer_tagline">Tumutulong sa mga OFW na magpadala ng mas malaki sa kanilang mga mahal sa buhay.</string>
+    <string name="landing_learn">Matuto</string>
+    <string name="landing_company">Kompanya</string>
+    <string name="landing_usd_to_php">USD to PHP</string>
+    <string name="landing_aud_to_php">AUD to PHP</string>
+    <string name="landing_sar_to_php">SAR to PHP</string>
+    <string name="landing_aed_to_php">AED to PHP</string>
+    <string name="landing_sgd_to_php">SGD to PHP</string>
+    <string name="landing_gbp_to_php">GBP to PHP</string>
+    <string name="landing_financial_literacy">Financial Literacy</string>
+    <string name="landing_scam_protection">Proteksyon sa Scam</string>
+    <string name="landing_budgeting_tips">Mga Tip sa Budgeting</string>
+    <string name="landing_retirement_guide">Gabay sa Pagreretiro</string>
+    <string name="landing_about_us">Tungkol sa Amin</string>
+    <string name="landing_contact">Kontakin Kami</string>
+    <string name="landing_careers">Mga Trabaho</string>
+    <string name="landing_press">Press</string>
+    <string name="landing_partners">Mga Partner</string>
+    <string name="landing_payout_methods">Paraan ng Pagbayad</string>
+    <string name="landing_copyright">© 2026 AI Padala. All rights reserved.</string>
 </resources>

@@ -1,6 +1,9 @@
 package com.aipadala.android.presentation.navigation
 
 sealed class Screen(val route: String) {
+    // Landing Page (Entry Point)
+    data object Landing : Screen("landing")
+
     // Bottom Navigation Destinations
     data object Home : Screen("home")
     data object Compare : Screen("compare")
@@ -25,4 +28,10 @@ sealed class Screen(val route: String) {
     }
 
     data object Onboarding : Screen("onboarding")
+
+    data object SignIn : Screen("signin")
+
+    data object CompareWithCurrency : Screen("compare/{currency}") {
+        fun createRoute(currency: String) = "compare/$currency"
+    }
 }

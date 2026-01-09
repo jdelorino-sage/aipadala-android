@@ -13,6 +13,7 @@ import com.aipadala.android.presentation.screens.comparison.ComparisonResultScre
 import com.aipadala.android.presentation.screens.comparison.ComparisonScreen
 import com.aipadala.android.presentation.screens.favorites.FavoritesScreen
 import com.aipadala.android.presentation.screens.home.HomeScreen
+import com.aipadala.android.presentation.screens.landing.LandingScreen
 import com.aipadala.android.presentation.screens.onboarding.OnboardingScreen
 import com.aipadala.android.presentation.screens.provider.ProviderDetailScreen
 import com.aipadala.android.presentation.screens.settings.SettingsScreen
@@ -20,7 +21,7 @@ import com.aipadala.android.presentation.screens.settings.SettingsScreen
 @Composable
 fun AIPadalaNavHost(
     navController: NavHostController,
-    startDestination: String = Screen.Home.route,
+    startDestination: String = Screen.Landing.route,
     modifier: Modifier = Modifier,
     onAffiliateClick: (url: String, fromCurrency: String, toCurrency: String, amount: Double) -> Unit
 ) {
@@ -29,6 +30,31 @@ fun AIPadalaNavHost(
         startDestination = startDestination,
         modifier = modifier
     ) {
+        // Landing Page
+        composable(Screen.Landing.route) {
+            LandingScreen(
+                onNavigateToCompare = {
+                    navController.navigate(Screen.Compare.route)
+                },
+                onNavigateToCompareWithCurrency = { currency ->
+                    navController.navigate(Screen.ComparisonResult.createRoute(currency, "PHP", 500.0))
+                },
+                onNavigateToSignIn = {
+                    // Navigate to sign in (placeholder)
+                    navController.navigate(Screen.Home.route)
+                },
+                onNavigateToOnboarding = {
+                    navController.navigate(Screen.Onboarding.route)
+                },
+                onNavigateToProvider = { providerId ->
+                    navController.navigate(Screen.ProviderDetail.createRoute(providerId))
+                },
+                onOpenAffiliateLink = { url ->
+                    onAffiliateClick(url, "AUD", "PHP", 500.0)
+                }
+            )
+        }
+
         // Home
         composable(Screen.Home.route) {
             HomeScreen(
