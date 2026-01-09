@@ -30,6 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.aipadala.android.R
+import com.aipadala.android.core.util.Constants
 import com.aipadala.android.data.model.RemittanceProvider
 import com.aipadala.android.presentation.components.comparison.TrustScoreBadge
 import com.aipadala.android.presentation.theme.AIPadalaColors
@@ -39,7 +40,7 @@ import com.aipadala.android.presentation.theme.AIPadalaColors
 fun ProviderDetailScreen(
     providerId: String,
     onNavigateBack: () -> Unit,
-    onOpenAffiliate: (String) -> Unit
+    onOpenAffiliate: (url: String, fromCurrency: String, toCurrency: String, amount: Double) -> Unit
 ) {
     val provider = RemittanceProvider.getByName(providerId)
 
@@ -118,7 +119,14 @@ fun ProviderDetailScreen(
 
                 // Send Button
                 Button(
-                    onClick = { onOpenAffiliate(provider.affiliateBaseUrl) },
+                    onClick = {
+                        onOpenAffiliate(
+                            provider.affiliateBaseUrl,
+                            "USD", // Default source currency
+                            Constants.TARGET_CURRENCY,
+                            Constants.DEFAULT_SEND_AMOUNT
+                        )
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp),

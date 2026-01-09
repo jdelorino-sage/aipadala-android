@@ -26,6 +26,9 @@ object DatabaseModule {
         AIPadalaDatabase::class.java,
         "aipadala_database"
     )
+        // For v1.0, use destructive migration since there's no production data to preserve.
+        // TODO: Implement proper migrations for future schema changes (v2.0+)
+        // Example: .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
         .fallbackToDestructiveMigration()
         .build()
 

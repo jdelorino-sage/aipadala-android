@@ -22,7 +22,7 @@ fun AIPadalaNavHost(
     navController: NavHostController,
     startDestination: String = Screen.Home.route,
     modifier: Modifier = Modifier,
-    onAffiliateClick: (String) -> Unit
+    onAffiliateClick: (url: String, fromCurrency: String, toCurrency: String, amount: Double) -> Unit
 ) {
     NavHost(
         navController = navController,
@@ -65,13 +65,20 @@ fun AIPadalaNavHost(
                 navArgument("amount") { type = NavType.FloatType }
             )
         ) { backStackEntry ->
-            val fromCurrency = backStackEntry.arguments?.getString("fromCurrency") ?: ""
-            val toCurrency = backStackEntry.arguments?.getString("toCurrency") ?: "PHP"
-            val amount = backStackEntry.arguments?.getFloat("amount")?.toDouble() ?: 0.0
+            val fromCurrency = backStackEntry.arguments?.getString("fromCurrency")
+            val toCurrency = backStackEntry.arguments?.getString("toCurrency")
+            val amount = backStackEntry.arguments?.getFloat("amount")?.toDouble()
+
+            // Validate required arguments
+            if (fromCurrency.isNullOrBlank() || amount == null || amount <= 0) {
+                // Navigate back if arguments are invalid
+                navController.popBackStack()
+                return@composable
+            }
 
             ComparisonResultScreen(
                 fromCurrency = fromCurrency,
-                toCurrency = toCurrency,
+                toCurrency = toCurrency ?: "PHP",
                 amount = amount,
                 onNavigateToProvider = { providerId ->
                     navController.navigate(Screen.ProviderDetail.createRoute(providerId))
@@ -79,7 +86,9 @@ fun AIPadalaNavHost(
                 onNavigateBack = {
                     navController.popBackStack()
                 },
-                onOpenAffiliate = onAffiliateClick
+                onOpenAffiliate = { url ->
+                    onAffiliateClick(url, fromCurrency, toCurrency ?: "PHP", amount)
+                }
             )
         }
 
@@ -90,13 +99,22 @@ fun AIPadalaNavHost(
                 navArgument("providerId") { type = NavType.StringType }
             )
         ) { backStackEntry ->
-            val providerId = backStackEntry.arguments?.getString("providerId") ?: ""
+            val providerId = backStackEntry.arguments?.getString("providerId")
+
+            // Validate required arguments
+            if (providerId.isNullOrBlank()) {
+                navController.popBackStack()
+                return@composable
+            }
+
             ProviderDetailScreen(
                 providerId = providerId,
                 onNavigateBack = {
                     navController.popBackStack()
                 },
-                onOpenAffiliate = onAffiliateClick
+                onOpenAffiliate = { url, fromCurrency, toCurrency, amount ->
+                    onAffiliateClick(url, fromCurrency, toCurrency, amount)
+                }
             )
         }
 

@@ -13,6 +13,7 @@ import com.aipadala.android.AIPadalaApp
 import com.aipadala.android.R
 import com.aipadala.android.presentation.MainActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
+import java.util.concurrent.atomic.AtomicInteger
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -23,7 +24,7 @@ class AIPadalaNotificationManager @Inject constructor(
     private val notificationManager =
         context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-    private var notificationId = 0
+    private val notificationId = AtomicInteger(0)
 
     fun showRateAlertNotification(
         title: String,
@@ -135,5 +136,5 @@ class AIPadalaNotificationManager @Inject constructor(
         }
     }
 
-    private fun getNextNotificationId(): Int = notificationId++
+    private fun getNextNotificationId(): Int = notificationId.incrementAndGet()
 }
