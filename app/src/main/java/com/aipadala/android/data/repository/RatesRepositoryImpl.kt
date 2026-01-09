@@ -1,5 +1,6 @@
 package com.aipadala.android.data.repository
 
+import android.util.Log
 import com.aipadala.android.core.database.dao.RatesDao
 import com.aipadala.android.core.database.entities.CachedRateEntity
 import com.aipadala.android.core.network.NetworkMonitor
@@ -17,6 +18,9 @@ import com.aipadala.android.data.remote.api.RatesApi
 import com.aipadala.android.data.remote.dto.ComparisonResponse
 import com.aipadala.android.data.remote.dto.ProviderQuoteDto
 import com.aipadala.android.domain.repository.RatesRepository
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
@@ -30,6 +34,10 @@ class RatesRepositoryImpl @Inject constructor(
     private val ratesDao: RatesDao,
     private val networkMonitor: NetworkMonitor
 ) : RatesRepository {
+
+    companion object {
+        private const val TAG = "RatesRepository"
+    }
 
     override fun getComparison(
         fromCurrency: String,
@@ -58,6 +66,7 @@ class RatesRepositoryImpl @Inject constructor(
                 val summary = mapResponseToSummary(response, amount)
                 emit(Resource.Success(summary))
             } catch (e: Exception) {
+                Log.e(TAG, "Failed to fetch comparison for $fromCurrency→$toCurrency: ${e.message}", e)
                 if (cachedRates.isEmpty()) {
                     emit(Resource.Error("Unable to fetch rates. Please check your connection."))
                 }
@@ -81,6 +90,7 @@ class RatesRepositoryImpl @Inject constructor(
                 timestamp = System.currentTimeMillis()
             )
         } catch (e: Exception) {
+            Log.e(TAG, "Failed to get latest rate for $fromCurrency→$toCurrency: ${e.message}", e)
             // Return cached rate if available
             val cached = ratesDao.getRatesSync(fromCurrency, toCurrency).firstOrNull()
             ExchangeRate(
@@ -113,24 +123,33 @@ class RatesRepositoryImpl @Inject constructor(
             )
             emit(Resource.Success(history))
         } catch (e: Exception) {
+            Log.e(TAG, "Failed to get rate history for $fromCurrency→$toCurrency: ${e.message}", e)
             emit(Resource.Error("Unable to fetch rate history."))
         }
     }
 
-    override suspend fun cacheLatestRates() {
-        SupportedCurrencies.POPULAR_CURRENCIES.forEach { currency ->
-            try {
-                val response = ratesApi.getComparison(currency.code, "PHP", 500.0)
-                val entities = mapResponseToEntities(response)
-                ratesDao.insertRates(entities)
-            } catch (e: Exception) {
-                // Log but don't fail entire operation
+    override suspend fun cacheLatestRates() = coroutineScope {
+        // Fetch rates in parallel for all popular currencies
+        val jobs = SupportedCurrencies.POPULAR_CURRENCIES.map { currency ->
+            async {
+                try {
+                    val response = ratesApi.getComparison(currency.code, "PHP", Constants.DEFAULT_SEND_AMOUNT)
+                    val entities = mapResponseToEntities(response)
+                    ratesDao.insertRates(entities)
+                    Log.d(TAG, "Successfully cached rates for ${currency.code}")
+                } catch (e: Exception) {
+                    Log.w(TAG, "Failed to cache rates for ${currency.code}: ${e.message}")
+                }
             }
         }
+
+        // Wait for all parallel fetches to complete
+        jobs.awaitAll()
 
         // Clean old cache (older than 24 hours)
         val threshold = System.currentTimeMillis() - TimeUnit.HOURS.toMillis(Constants.CACHE_DURATION_HOURS)
         ratesDao.deleteOldRates(threshold)
+        Log.d(TAG, "Cleaned up old cached rates")
     }
 
     private fun mapResponseToEntities(response: ComparisonResponse): List<CachedRateEntity> {

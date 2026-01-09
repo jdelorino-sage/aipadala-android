@@ -9,6 +9,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -37,6 +38,22 @@ object NetworkModule {
             }
         }
 
+        // Certificate pinning for production API endpoints
+        // To obtain the certificate hash, run:
+        // openssl s_client -servername api.aipadala.com -connect api.aipadala.com:443 | \
+        //   openssl x509 -pubkey -noout | \
+        //   openssl pkey -pubin -outform der | \
+        //   openssl dgst -sha256 -binary | openssl enc -base64
+        val certificatePinner = CertificatePinner.Builder()
+            // Production API certificate pins
+            // TODO: Replace with actual certificate hashes before production release
+            // Add backup pins to prevent lockout during certificate rotation
+            .add("api.aipadala.com", "sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=") // Primary pin (placeholder)
+            .add("api.aipadala.com", "sha256/BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=") // Backup pin (placeholder)
+            // Staging API - only enforce in release builds
+            .add("api-staging.aipadala.com", "sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=")
+            .build()
+
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .addInterceptor { chain ->
@@ -47,6 +64,13 @@ object NetworkModule {
                     .addHeader("X-App-Version", BuildConfig.VERSION_NAME)
                     .build()
                 chain.proceed(request)
+            }
+            // Only enable certificate pinning in release builds
+            // This allows debugging with proxy tools during development
+            .apply {
+                if (!BuildConfig.DEBUG) {
+                    certificatePinner(certificatePinner)
+                }
             }
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)

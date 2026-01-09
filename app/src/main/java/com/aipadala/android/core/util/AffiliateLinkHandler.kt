@@ -3,6 +3,7 @@ package com.aipadala.android.core.util
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
@@ -17,6 +18,8 @@ class AffiliateLinkHandler @Inject constructor(
     private val analyticsTracker: AnalyticsTracker
 ) {
     companion object {
+        private const val TAG = "AffiliateLinkHandler"
+
         private val affiliateIds = mapOf(
             "wise" to "aipadala",
             "remitly" to "aipadala",
@@ -29,6 +32,62 @@ class AffiliateLinkHandler @Inject constructor(
             "pangea" to "aipadala",
             "taptap_send" to "aipadala"
         )
+
+        // Whitelist of allowed domains for affiliate links
+        private val allowedDomains = setOf(
+            "wise.com",
+            "www.wise.com",
+            "remitly.com",
+            "www.remitly.com",
+            "westernunion.com",
+            "www.westernunion.com",
+            "worldremit.com",
+            "www.worldremit.com",
+            "moneygram.com",
+            "www.moneygram.com",
+            "xoom.com",
+            "www.xoom.com",
+            "instarem.com",
+            "www.instarem.com",
+            "ofx.com",
+            "www.ofx.com",
+            "gopangea.com",
+            "www.gopangea.com",
+            "taptapsend.com",
+            "www.taptapsend.com"
+        )
+    }
+
+    /**
+     * Validates if the given URL is from an allowed provider domain.
+     * Returns true if the URL is safe to open, false otherwise.
+     */
+    private fun isValidAffiliateUrl(url: String): Boolean {
+        return try {
+            val uri = Uri.parse(url)
+            val host = uri.host?.lowercase() ?: return false
+            val scheme = uri.scheme?.lowercase()
+
+            // Only allow HTTPS URLs
+            if (scheme != "https") {
+                Log.w(TAG, "Rejected non-HTTPS URL: $url")
+                return false
+            }
+
+            // Check if host is in allowlist
+            val isAllowed = allowedDomains.any { domain ->
+                host == domain || host.endsWith(".$domain")
+            }
+
+            if (!isAllowed) {
+                Log.w(TAG, "Rejected URL with unknown domain: $host")
+            }
+
+            isAllowed
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to validate URL: $url", e)
+            false
+        }
     }
 
     fun buildAffiliateUrl(
@@ -59,6 +118,13 @@ class AffiliateLinkHandler @Inject constructor(
         corridor: String,
         amount: Double
     ) {
+        // Validate URL before opening
+        if (!isValidAffiliateUrl(url)) {
+            analyticsTracker.trackError("affiliate_link", "Blocked invalid URL: $url")
+            Log.e(TAG, "Attempted to open invalid affiliate URL: $url")
+            return
+        }
+
         // Track the click
         analyticsTracker.trackAffiliateClick(
             provider = provider.name,
@@ -84,12 +150,14 @@ class AffiliateLinkHandler @Inject constructor(
             customTabsIntent.intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             customTabsIntent.launchUrl(context, Uri.parse(url))
         } catch (e: Exception) {
+            Log.e(TAG, "Failed to open Custom Tab for URL: $url", e)
             // Fallback to regular browser
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             try {
                 context.startActivity(intent)
-            } catch (e: Exception) {
+            } catch (e2: Exception) {
+                Log.e(TAG, "Failed to open browser for URL: $url", e2)
                 analyticsTracker.trackError("affiliate_link", "Failed to open URL: $url")
             }
         }
