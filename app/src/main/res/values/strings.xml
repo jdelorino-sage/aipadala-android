@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AI Padala</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_compare">Compare</string>
+    <string name="nav_alerts">Alerts</string>
+    <string name="nav_favorites">Favorites</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Common -->
+    <string name="back">Back</string>
+    <string name="retry">Retry</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="get_started">Get Started</string>
+
+    <!-- Hero Section -->
+    <string name="hero_headline_tagalog">Malayo ka man, nararamdaman ka nila sa bawat padala.</string>
+    <string name="hero_subtext_tagalog">Huwag hayaang kumain ang hidden fees sa pinaghirapan mo.</string>
+    <string name="trusted_by_ofw_families">Trusted by 10,000+ OFW families</string>
+
+    <!-- Comparison -->
+    <string name="compare_rates">Compare Rates</string>
+    <string name="compare_rates_now">Compare Rates Now</string>
+    <string name="compare">Compare</string>
+    <string name="find_best_rate">Find Best Rate</string>
+    <string name="you_send">You Send</string>
+    <string name="they_receive">They Receive</string>
+    <string name="exchange_rate">Exchange Rate</string>
+    <string name="best_value">Best Value</string>
+    <string name="scanning_providers">Scanning 10+ providers…</string>
+    <string name="send_with_provider">Send with %1$s</string>
+    <string name="comparison_results">Results</string>
+    <string name="your_family_receives">Your family receives</string>
+    <string name="savings_highlight">₱%1$s more than average</string>
+    <string name="ai_recommends">🤖 AI Recommends</string>
+    <string name="sending_from">Sending from</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+
+    <!-- Currency -->
+    <string name="select_currency">Select Currency</string>
+    <string name="search_currency">Search currency…</string>
+    <string name="popular">Popular</string>
+    <string name="all_currencies">All Currencies</string>
+
+    <!-- Alerts -->
+    <string name="rate_alerts">Rate Alerts</string>
+    <string name="create_alert">Create Alert</string>
+    <string name="set_alert">Set Alert</string>
+    <string name="no_alerts">No Alerts Yet</string>
+    <string name="no_alerts_description">Create an alert to get notified when rates reach your target.</string>
+    <string name="rate_alert_title">Rate Alert! 📈</string>
+    <string name="rate_alert_message">%1$s rate reached %2$.2f via %3$s</string>
+    <string name="rate_alert_triggered">Your rate target was reached!</string>
+    <string name="rate_alert_body">%1$s→PHP is now at %2$.2f</string>
+    <string name="select_corridor">Select Corridor</string>
+    <string name="alert_when">Alert When</string>
+    <string name="rate_above">Rate ≥</string>
+    <string name="rate_below">Rate ≤</string>
+    <string name="target_rate">Target Rate</string>
+
+    <!-- Favorites -->
+    <string name="favorites">Favorites</string>
+    <string name="your_corridors">Your Corridors</string>
+    <string name="no_favorites">No Favorites Yet</string>
+    <string name="no_favorites_description">Add your frequently used corridors for quick access.</string>
+    <string name="favorites_limit">%1$d of %2$d corridors</string>
+
+    <!-- Providers -->
+    <string name="top_providers_today">Top Providers Today</string>
+    <string name="trust_score">Trust Score</string>
+    <string name="delivery_time">Delivery</string>
+    <string name="fee">Fee</string>
+    <string name="payout_methods">Payout Methods</string>
+
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+    <string name="language">Language</string>
+    <string name="notifications">Notifications</string>
+    <string name="notifications_description">Receive rate alerts and updates</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="dark_mode_description">Use dark theme</string>
+    <string name="about">About AI Padala</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="help">Help &amp; Support</string>
+
+    <!-- Tips -->
+    <string name="tip_of_the_day">Tip of the Day</string>
+
+    <!-- Notification Channels -->
+    <string name="channel_rate_alerts">Rate Alerts</string>
+    <string name="channel_rate_alerts_description">Get notified when rates reach your target</string>
+    <string name="channel_promotions">Promotions</string>
+    <string name="channel_promotions_description">Receive special offers and promotions</string>
+    <string name="channel_tips">Daily Tips</string>
+    <string name="channel_tips_description">Helpful tips for OFW remittances</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title_1">Compare Rates Instantly</string>
+    <string name="onboarding_desc_1">Find the best exchange rates from 10+ trusted remittance providers in seconds.</string>
+    <string name="onboarding_title_2">Save More Money</string>
+    <string name="onboarding_desc_2">Our AI helps you find the best rates so your family receives more.</string>
+    <string name="onboarding_title_3">Never Miss a Good Rate</string>
+    <string name="onboarding_desc_3">Set up rate alerts and get notified when rates reach your target.</string>
+
+    <!-- Offline -->
+    <string name="offline_banner">You\'re offline. Showing cached rates.</string>
+    <string name="last_updated">Last updated: %1$s</string>
+
+    <!-- Errors -->
+    <string name="error_generic">Something went wrong. Please try again.</string>
+    <string name="error_network">Please check your internet connection.</string>
+</resources>

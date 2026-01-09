@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.AIPadala" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/primary_400</item>
+        <item name="colorOnPrimary">@color/gray_900</item>
+        <item name="colorPrimaryContainer">@color/primary_800</item>
+        <item name="colorOnPrimaryContainer">@color/primary_100</item>
+
+        <item name="colorSecondary">@color/accent_400</item>
+        <item name="colorOnSecondary">@color/gray_900</item>
+        <item name="colorSecondaryContainer">@color/accent_800</item>
+        <item name="colorOnSecondaryContainer">@color/accent_100</item>
+
+        <item name="colorTertiary">@color/success_500</item>
+        <item name="colorOnTertiary">@color/white</item>
+
+        <item name="colorError">@color/error_500</item>
+        <item name="colorOnError">@color/white</item>
+
+        <item name="android:colorBackground">@color/gray_900</item>
+        <item name="colorOnBackground">@color/gray_100</item>
+
+        <item name="colorSurface">@color/gray_800</item>
+        <item name="colorOnSurface">@color/gray_100</item>
+        <item name="colorSurfaceVariant">@color/gray_700</item>
+        <item name="colorOnSurfaceVariant">@color/gray_300</item>
+
+        <item name="colorOutline">@color/gray_600</item>
+
+        <item name="android:statusBarColor">@color/gray_900</item>
+        <item name="android:navigationBarColor">@color/gray_800</item>
+    </style>
+</resources>

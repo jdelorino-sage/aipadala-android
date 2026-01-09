@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.AIPadala" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary_500</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/primary_100</item>
+        <item name="colorOnPrimaryContainer">@color/primary_900</item>
+
+        <item name="colorSecondary">@color/accent_500</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/accent_100</item>
+        <item name="colorOnSecondaryContainer">@color/accent_900</item>
+
+        <item name="colorTertiary">@color/success_500</item>
+        <item name="colorOnTertiary">@color/white</item>
+
+        <item name="colorError">@color/error_500</item>
+        <item name="colorOnError">@color/white</item>
+
+        <item name="android:colorBackground">@color/gray_50</item>
+        <item name="colorOnBackground">@color/gray_900</item>
+
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/gray_900</item>
+        <item name="colorSurfaceVariant">@color/gray_100</item>
+        <item name="colorOnSurfaceVariant">@color/gray_700</item>
+
+        <item name="colorOutline">@color/gray_300</item>
+
+        <item name="android:statusBarColor">@color/primary_500</item>
+        <item name="android:navigationBarColor">@color/white</item>
+    </style>
+
+    <style name="Theme.AIPadala.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/primary_500</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.AIPadala</item>
+    </style>
+</resources>
