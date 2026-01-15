@@ -19,10 +19,14 @@
     <string name="save">Save</string>
     <string name="get_started">Get Started</string>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (Apple-style) -->
+    <string name="hero_headline_english">Send money home,\nwith confidence.</string>
+    <string name="hero_subtext_english">Find the best rates for your remittances to the Philippines.</string>
+    <string name="hero_tagline_tagalog">Malayo ka man, nararamdaman ka nila sa bawat padala.</string>
     <string name="hero_headline_tagalog">Malayo ka man, nararamdaman ka nila sa bawat padala.</string>
     <string name="hero_subtext_tagalog">Huwag hayaang kumain ang hidden fees sa pinaghirapan mo.</string>
     <string name="trusted_by_ofw_families">Trusted by 10,000+ OFW families</string>
+    <string name="quick_actions">Quick Actions</string>
 
     <!-- Comparison -->
     <string name="compare_rates">Compare Rates</string>
