@@ -1,6 +1,10 @@
 package com.aipadala.android.presentation.screens.home
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -13,34 +17,39 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Compare
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
+import androidx.compose.material.icons.outlined.CompareArrows
+import androidx.compose.material.icons.outlined.Notifications
+import androidx.compose.material.icons.outlined.TrendingUp
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.aipadala.android.R
-import com.aipadala.android.presentation.components.common.AIPadalaTopBar
-import com.aipadala.android.presentation.components.glassmorphism.GlassGradientBackground
+import com.aipadala.android.presentation.components.apple.AppleFadeSlideIn
+import com.aipadala.android.presentation.components.apple.AppleAnimations
+import com.aipadala.android.presentation.components.apple.ApplePrimaryButton
+import com.aipadala.android.presentation.components.apple.AppleStyleCard
+import com.aipadala.android.presentation.components.apple.AppleStyleSubtleCard
+import com.aipadala.android.presentation.components.apple.QuickActionTile
 import com.aipadala.android.presentation.theme.AIPadalaColors
+import com.aipadala.android.presentation.theme.Dimensions
+import kotlinx.coroutines.delay
 
 @Composable
 fun HomeScreen(
@@ -51,56 +60,84 @@ fun HomeScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+    // Animation state
+    var showContent by remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        delay(100)
+        showContent = true
+    }
+
     Scaffold(
-        topBar = {
-            AIPadalaTopBar(
-                title = stringResource(R.string.app_name),
-                showLogo = true
-            )
-        }
+        containerColor = AIPadalaColors.SystemBackground
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            contentPadding = PaddingValues(
+                start = Dimensions.PaddingScreen,
+                end = Dimensions.PaddingScreen,
+                top = Dimensions.Spacing3xl,
+                bottom = Dimensions.Spacing4xl
+            ),
+            verticalArrangement = Arrangement.spacedBy(Dimensions.PaddingSection)
         ) {
-            // Hero Section with Quick Compare
+            // Hero Section - Clean, minimal
             item {
-                HeroSection(
-                    onCompareClick = onNavigateToCompare
-                )
+                AppleFadeSlideIn(visible = showContent, delayMillis = 0) {
+                    HeroSection(onCompareClick = onNavigateToCompare)
+                }
             }
 
             // Favorite Corridors (if any)
             if (uiState.favoriteCorridors.isNotEmpty()) {
                 item {
-                    Text(
-                        text = stringResource(R.string.your_corridors),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.SemiBold
-                    )
+                    AppleFadeSlideIn(
+                        visible = showContent,
+                        delayMillis = AppleAnimations.STAGGER_DELAY * 2
+                    ) {
+                        SectionHeader(title = stringResource(R.string.your_corridors))
+                    }
                 }
-                items(uiState.favoriteCorridors) { corridor ->
-                    FavoriteCorridorCard(
-                        corridor = corridor,
-                        onClick = { /* Navigate to comparison */ }
-                    )
+                itemsIndexed(uiState.favoriteCorridors) { index, corridor ->
+                    AppleFadeSlideIn(
+                        visible = showContent,
+                        delayMillis = AppleAnimations.STAGGER_DELAY * (3 + index)
+                    ) {
+                        FavoriteCorridorCard(
+                            corridor = corridor,
+                            onClick = { /* Navigate to comparison */ }
+                        )
+                    }
                 }
             }
 
             // Quick Actions
             item {
-                QuickActionsRow(
-                    onCompareClick = onNavigateToCompare,
-                    onAlertsClick = onNavigateToAlerts
-                )
+                AppleFadeSlideIn(
+                    visible = showContent,
+                    delayMillis = AppleAnimations.STAGGER_DELAY * 5
+                ) {
+                    Column {
+                        SectionHeader(title = stringResource(R.string.quick_actions))
+                        Spacer(modifier = Modifier.height(Dimensions.SpacingMd))
+                        QuickActionsRow(
+                            onCompareClick = onNavigateToCompare,
+                            onAlertsClick = onNavigateToAlerts
+                        )
+                    }
+                }
             }
 
-            // OFW Tips (Rotating)
+            // OFW Tip
             item {
-                OFWTipCard(tip = uiState.dailyTip)
+                AppleFadeSlideIn(
+                    visible = showContent,
+                    delayMillis = AppleAnimations.STAGGER_DELAY * 6
+                ) {
+                    OFWTipBanner(tip = uiState.dailyTip)
+                }
             }
         }
     }
@@ -110,70 +147,68 @@ fun HomeScreen(
 private fun HeroSection(
     onCompareClick: () -> Unit
 ) {
-    GlassGradientBackground(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(280.dp)
-            .clip(RoundedCornerShape(24.dp))
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.Start
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp),
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            // Trust Badge
-            Surface(
-                color = AIPadalaColors.White.copy(alpha = 0.2f),
-                shape = RoundedCornerShape(20.dp)
-            ) {
-                Text(
-                    text = "⭐ ${stringResource(R.string.trusted_by_ofw_families)}",
-                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                    style = MaterialTheme.typography.labelMedium,
-                    color = AIPadalaColors.White
-                )
-            }
+        // Large headline (Apple-style)
+        Text(
+            text = stringResource(R.string.hero_headline_english),
+            style = MaterialTheme.typography.displaySmall.copy(
+                fontSize = 34.sp,
+                lineHeight = 41.sp,
+                letterSpacing = 0.25.sp
+            ),
+            fontWeight = FontWeight.Bold,
+            color = AIPadalaColors.Gray900
+        )
 
-            // Tagalog Headline
-            Column {
-                Text(
-                    text = stringResource(R.string.hero_headline_tagalog),
-                    style = MaterialTheme.typography.headlineMedium,
-                    color = AIPadalaColors.White,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = stringResource(R.string.hero_subtext_tagalog),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = AIPadalaColors.White.copy(alpha = 0.9f)
-                )
-            }
+        Spacer(modifier = Modifier.height(Dimensions.SpacingMd))
 
-            // CTA Button
-            Button(
-                onClick = onCompareClick,
-                modifier = Modifier.fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = AIPadalaColors.CTAGradientStart
-                ),
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Compare,
-                    contentDescription = null,
-                    modifier = Modifier.size(20.dp)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = stringResource(R.string.compare_rates_now),
-                    style = MaterialTheme.typography.labelLarge,
-                    fontWeight = FontWeight.SemiBold
-                )
-            }
-        }
+        // Subtext
+        Text(
+            text = stringResource(R.string.hero_subtext_english),
+            style = MaterialTheme.typography.bodyLarge,
+            color = AIPadalaColors.Gray500,
+            lineHeight = 24.sp
+        )
+
+        Spacer(modifier = Modifier.height(Dimensions.SpacingSm))
+
+        // Tagalog tagline (emotional connection)
+        Text(
+            text = stringResource(R.string.hero_tagline_tagalog),
+            style = MaterialTheme.typography.bodyMedium,
+            color = AIPadalaColors.Primary500,
+            fontWeight = FontWeight.Medium
+        )
+
+        Spacer(modifier = Modifier.height(Dimensions.SpacingXxl))
+
+        // CTA Button
+        ApplePrimaryButton(
+            text = stringResource(R.string.compare_rates_now),
+            onClick = onCompareClick,
+            showArrow = true
+        )
     }
+}
+
+@Composable
+private fun SectionHeader(
+    title: String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = title,
+        style = MaterialTheme.typography.titleMedium.copy(
+            fontSize = 20.sp,
+            letterSpacing = 0.15.sp
+        ),
+        fontWeight = FontWeight.SemiBold,
+        color = AIPadalaColors.Gray900,
+        modifier = modifier
+    )
 }
 
 @Composable
@@ -183,27 +218,23 @@ private fun QuickActionsRow(
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+        horizontalArrangement = Arrangement.spacedBy(Dimensions.SpacingLg)
     ) {
-        OutlinedButton(
+        QuickActionTile(
+            icon = Icons.Outlined.CompareArrows,
+            label = stringResource(R.string.compare),
             onClick = onCompareClick,
-            modifier = Modifier.weight(1f),
-            shape = RoundedCornerShape(12.dp)
-        ) {
-            Icon(Icons.Default.Compare, contentDescription = null)
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(stringResource(R.string.compare))
-        }
+            iconTint = AIPadalaColors.Primary500,
+            modifier = Modifier.weight(1f)
+        )
 
-        OutlinedButton(
+        QuickActionTile(
+            icon = Icons.Outlined.Notifications,
+            label = stringResource(R.string.set_alert),
             onClick = onAlertsClick,
-            modifier = Modifier.weight(1f),
-            shape = RoundedCornerShape(12.dp)
-        ) {
-            Icon(Icons.Default.Notifications, contentDescription = null)
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(stringResource(R.string.set_alert))
-        }
+            iconTint = AIPadalaColors.Warning500,
+            modifier = Modifier.weight(1f)
+        )
     }
 }
 
@@ -212,71 +243,96 @@ private fun FavoriteCorridorCard(
     corridor: com.aipadala.android.data.model.FavoriteCorridor,
     onClick: () -> Unit
 ) {
-    Card(
+    AppleStyleCard(
         onClick = onClick,
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-        shape = RoundedCornerShape(12.dp)
+        modifier = Modifier.fillMaxWidth()
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
+                // Flag emojis
                 Text(
                     text = "${corridor.fromCurrency.flagEmoji} → ${corridor.toCurrency.flagEmoji}",
-                    style = MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.headlineSmall
                 )
-                Spacer(modifier = Modifier.width(12.dp))
+
+                Spacer(modifier = Modifier.width(Dimensions.SpacingMd))
+
                 Column {
                     Text(
                         text = "${corridor.fromCurrency.code} → ${corridor.toCurrency.code}",
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Medium
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.SemiBold,
+                        color = AIPadalaColors.Gray900
                     )
                     corridor.currentRate?.let { rate ->
+                        Spacer(modifier = Modifier.height(2.dp))
                         Text(
                             text = "1 ${corridor.fromCurrency.code} = $rate ${corridor.toCurrency.code}",
                             style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            color = AIPadalaColors.Gray500
                         )
                     }
                 }
+            }
+
+            // Trend indicator
+            Box(
+                modifier = Modifier
+                    .size(32.dp)
+                    .background(
+                        color = AIPadalaColors.Success500.copy(alpha = 0.1f),
+                        shape = androidx.compose.foundation.shape.CircleShape
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                androidx.compose.material3.Icon(
+                    imageVector = Icons.Outlined.TrendingUp,
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp),
+                    tint = AIPadalaColors.Success500
+                )
             }
         }
     }
 }
 
 @Composable
-private fun OFWTipCard(tip: String?) {
+private fun OFWTipBanner(tip: String?) {
     if (tip != null) {
-        Card(
+        AppleStyleSubtleCard(
             modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = AIPadalaColors.Primary50
-            ),
-            shape = RoundedCornerShape(12.dp)
+            backgroundColor = AIPadalaColors.Primary50
         ) {
-            Column(
-                modifier = Modifier.padding(16.dp)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.Top
             ) {
                 Text(
-                    text = "💡 ${stringResource(R.string.tip_of_the_day)}",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = AIPadalaColors.Primary700
+                    text = "💡",
+                    style = MaterialTheme.typography.titleMedium
                 )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = tip,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = AIPadalaColors.Primary900
-                )
+
+                Spacer(modifier = Modifier.width(Dimensions.SpacingMd))
+
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = stringResource(R.string.tip_of_the_day),
+                        style = MaterialTheme.typography.labelMedium,
+                        fontWeight = FontWeight.SemiBold,
+                        color = AIPadalaColors.Primary600
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = tip,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = AIPadalaColors.Primary900,
+                        lineHeight = 18.sp
+                    )
+                }
             }
         }
     }

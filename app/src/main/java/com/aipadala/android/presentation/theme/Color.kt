@@ -3,98 +3,122 @@ package com.aipadala.android.presentation.theme
 import androidx.compose.ui.graphics.Color
 
 /**
- * AI Padala Brand Colors
- * Primary: Sky Blue (#0ea5e9) - Trust, reliability, financial stability
- * Accent: Purple (#a855f7) - AI, innovation, technology
+ * AI Padala Brand Colors - Apple-Inspired Design System
+ * Primary: Apple Blue (#007AFF) - Trust, reliability, familiarity
+ * Design Philosophy: Clean, minimal, elegant with purposeful color use
  */
 object AIPadalaColors {
 
     // ═══════════════════════════════════════════════════════════════
-    // PRIMARY COLORS (Sky Blue - Trust & Reliability)
+    // PRIMARY COLORS (Apple Blue - Trust & Familiarity)
     // ═══════════════════════════════════════════════════════════════
-    val Primary50 = Color(0xFFF0F9FF)   // Lightest - backgrounds
-    val Primary100 = Color(0xFFE0F2FE)  // Light backgrounds
-    val Primary200 = Color(0xFFBAE6FD)  // Hover states
-    val Primary300 = Color(0xFF7DD3FC)  // Light accents
-    val Primary400 = Color(0xFF38BDF8)  // Gradient start
-    val Primary500 = Color(0xFF0EA5E9)  // ★ MAIN PRIMARY COLOR
-    val Primary600 = Color(0xFF0284C7)  // Buttons, emphasis
-    val Primary700 = Color(0xFF0369A1)  // Dark accents
-    val Primary800 = Color(0xFF075985)  // Deep blue
-    val Primary900 = Color(0xFF0C4A6E)  // Text, dark mode bg
-    val Primary950 = Color(0xFF082F49)  // Darkest
+    val Primary50 = Color(0xFFF0F7FF)   // Lightest - subtle backgrounds
+    val Primary100 = Color(0xFFE0EFFF)  // Light backgrounds
+    val Primary200 = Color(0xFFC2DFFF)  // Hover states
+    val Primary300 = Color(0xFF94C8FF)  // Light accents
+    val Primary400 = Color(0xFF5AAAFF)  // Lighter blue
+    val Primary500 = Color(0xFF007AFF)  // ★ APPLE BLUE - MAIN PRIMARY
+    val Primary600 = Color(0xFF0066D6)  // Pressed state
+    val Primary700 = Color(0xFF0052AD)  // Dark accents
+    val Primary800 = Color(0xFF003D82)  // Deep blue
+    val Primary900 = Color(0xFF002957)  // Text, dark mode bg
+    val Primary950 = Color(0xFF001A3D)  // Darkest
 
     // ═══════════════════════════════════════════════════════════════
-    // ACCENT COLORS (Purple - AI & Innovation)
+    // ACCENT COLORS (Apple Indigo - Premium & Modern)
     // ═══════════════════════════════════════════════════════════════
-    val Accent50 = Color(0xFFFAF5FF)    // Lightest
-    val Accent100 = Color(0xFFF3E8FF)   // Light backgrounds
-    val Accent200 = Color(0xFFE9D5FF)   // Hover states
-    val Accent300 = Color(0xFFD8B4FE)   // Light accents
-    val Accent400 = Color(0xFFC084FC)   // Gradient option
-    val Accent500 = Color(0xFFA855F7)   // ★ MAIN ACCENT COLOR
-    val Accent600 = Color(0xFF9333EA)   // Buttons, emphasis
-    val Accent700 = Color(0xFF7E22CE)   // Dark accents
-    val Accent800 = Color(0xFF6B21A8)   // Deep purple
-    val Accent900 = Color(0xFF581C87)   // Very dark
-    val Accent950 = Color(0xFF3B0764)   // Darkest
+    val Accent50 = Color(0xFFF5F3FF)    // Lightest
+    val Accent100 = Color(0xFFEDE9FE)   // Light backgrounds
+    val Accent200 = Color(0xFFDDD6FE)   // Hover states
+    val Accent300 = Color(0xFFC4B5FD)   // Light accents
+    val Accent400 = Color(0xFFA78BFA)   // Lighter indigo
+    val Accent500 = Color(0xFF5856D6)   // ★ APPLE INDIGO
+    val Accent600 = Color(0xFF4F46E5)   // Pressed state
+    val Accent700 = Color(0xFF4338CA)   // Dark accents
+    val Accent800 = Color(0xFF3730A3)   // Deep indigo
+    val Accent900 = Color(0xFF312E81)   // Very dark
+    val Accent950 = Color(0xFF1E1B4B)   // Darkest
 
     // ═══════════════════════════════════════════════════════════════
-    // SEMANTIC COLORS
+    // SEMANTIC COLORS (Apple System Colors)
     // ═══════════════════════════════════════════════════════════════
-    val Success50 = Color(0xFFECFDF5)
-    val Success100 = Color(0xFFD1FAE5)
-    val Success500 = Color(0xFF10B981)  // Green - positive/savings
-    val Success600 = Color(0xFF059669)  // Green dark
-    val Success700 = Color(0xFF047857)
+    val Success50 = Color(0xFFECFDF3)
+    val Success100 = Color(0xFFD1FADF)
+    val Success500 = Color(0xFF34C759)  // Apple Green
+    val Success600 = Color(0xFF28A745)  // Darker green
+    val Success700 = Color(0xFF1E7E34)
 
     val Warning50 = Color(0xFFFFFBEB)
     val Warning100 = Color(0xFFFEF3C7)
-    val Warning500 = Color(0xFFF59E0B)  // Amber - alerts (Philippine sun)
-    val Warning600 = Color(0xFFD97706)  // Amber dark
+    val Warning500 = Color(0xFFFF9500)  // Apple Orange
+    val Warning600 = Color(0xFFE68600)  // Darker orange
 
     val Error50 = Color(0xFFFEF2F2)
     val Error100 = Color(0xFFFEE2E2)
-    val Error500 = Color(0xFFEF4444)   // Red - errors
-    val Error600 = Color(0xFFDC2626)   // Red dark
+    val Error500 = Color(0xFFFF3B30)   // Apple Red
+    val Error600 = Color(0xFFE6352B)   // Darker red
 
     // ═══════════════════════════════════════════════════════════════
-    // NEUTRALS
+    // APPLE SYSTEM GRAYS (iOS-inspired neutral palette)
     // ═══════════════════════════════════════════════════════════════
     val White = Color(0xFFFFFFFF)
-    val Gray50 = Color(0xFFF9FAFB)
-    val Gray100 = Color(0xFFF3F4F6)
-    val Gray200 = Color(0xFFE5E7EB)
-    val Gray300 = Color(0xFFD1D5DB)
-    val Gray400 = Color(0xFF9CA3AF)
-    val Gray500 = Color(0xFF6B7280)
-    val Gray600 = Color(0xFF4B5563)
-    val Gray700 = Color(0xFF374151)
-    val Gray800 = Color(0xFF1F2937)
-    val Gray900 = Color(0xFF111827)
+    val Gray50 = Color(0xFFF9FAFB)     // System background
+    val Gray100 = Color(0xFFF2F2F7)    // ★ iOS System Gray 6 - Main background
+    val Gray200 = Color(0xFFE5E5EA)    // iOS System Gray 5
+    val Gray300 = Color(0xFFD1D1D6)    // iOS System Gray 4
+    val Gray400 = Color(0xFFC7C7CC)    // iOS System Gray 3
+    val Gray500 = Color(0xFF8E8E93)    // ★ iOS Secondary Label
+    val Gray600 = Color(0xFF636366)    // iOS System Gray 2
+    val Gray700 = Color(0xFF48484A)    // iOS System Gray
+    val Gray800 = Color(0xFF2C2C2E)    // Dark surface
+    val Gray900 = Color(0xFF1C1C1E)    // ★ iOS Primary Label / Dark bg
     val Black = Color(0xFF000000)
 
     // ═══════════════════════════════════════════════════════════════
-    // HERO GRADIENT COLORS
+    // APPLE-STYLE BACKGROUNDS
     // ═══════════════════════════════════════════════════════════════
-    val HeroGradient1 = Color(0xFF1E1B4B)  // Deep indigo
-    val HeroGradient2 = Color(0xFF312E81)  // Indigo
-    val HeroGradient3 = Color(0xFF4C1D95)  // Purple
-    val HeroGradient4 = Color(0xFF1E3A5F)  // Blue-gray
-    val HeroGradient5 = Color(0xFF0C4A6E)  // Deep cyan
+    val SystemBackground = Color(0xFFF2F2F7)        // iOS grouped background
+    val SecondarySystemBackground = Color(0xFFFFFFFF) // Elevated cards
+    val TertiarySystemBackground = Color(0xFFF2F2F7)  // Tertiary content
+
+    // Dark mode backgrounds
+    val DarkSystemBackground = Color(0xFF000000)
+    val DarkSecondaryBackground = Color(0xFF1C1C1E)
+    val DarkTertiaryBackground = Color(0xFF2C2C2E)
 
     // ═══════════════════════════════════════════════════════════════
-    // CTA GRADIENT (Amber to Orange)
+    // APPLE-STYLE SEPARATORS & OVERLAYS
     // ═══════════════════════════════════════════════════════════════
-    val CTAGradientStart = Color(0xFFF59E0B)  // Amber
-    val CTAGradientEnd = Color(0xFFF97316)    // Orange
+    val Separator = Color(0x4D3C3C43)              // iOS separator (opaque)
+    val SeparatorOpaque = Color(0xFFC6C6C8)       // Non-transparent separator
+    val Overlay = Color(0x4D000000)               // Modal overlay
 
     // ═══════════════════════════════════════════════════════════════
-    // GLASSMORPHISM
+    // SOFT SHADOW COLORS (Apple-style elevation)
     // ═══════════════════════════════════════════════════════════════
-    val GlassBg = Color(0x33FFFFFF)           // 20% white
-    val GlassBorder = Color(0x4DFFFFFF)       // 30% white
-    val GlassShadow = Color(0x5E1F2683)       // rgba(31, 38, 135, 0.37)
+    val ShadowLight = Color(0x0A000000)           // 4% black - subtle
+    val ShadowMedium = Color(0x14000000)          // 8% black - cards
+    val ShadowStrong = Color(0x1F000000)          // 12% black - elevated
+
+    // ═══════════════════════════════════════════════════════════════
+    // CTA GRADIENT (Apple Blue gradient)
+    // ═══════════════════════════════════════════════════════════════
+    val CTAGradientStart = Color(0xFF007AFF)      // Apple Blue
+    val CTAGradientEnd = Color(0xFF5856D6)        // Apple Indigo
+
+    // ═══════════════════════════════════════════════════════════════
+    // LEGACY GLASSMORPHISM (kept for compatibility)
+    // ═══════════════════════════════════════════════════════════════
+    val GlassBg = Color(0x33FFFFFF)               // 20% white
+    val GlassBorder = Color(0x4DFFFFFF)           // 30% white
+    val GlassShadow = Color(0x5E1F2683)           // rgba(31, 38, 135, 0.37)
+
+    // Legacy hero gradients (kept for other screens)
+    val HeroGradient1 = Color(0xFF1E1B4B)
+    val HeroGradient2 = Color(0xFF312E81)
+    val HeroGradient3 = Color(0xFF4C1D95)
+    val HeroGradient4 = Color(0xFF1E3A5F)
+    val HeroGradient5 = Color(0xFF0C4A6E)
 
     // ═══════════════════════════════════════════════════════════════
     // PROVIDER BRAND COLORS

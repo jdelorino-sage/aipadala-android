@@ -1,5 +1,6 @@
 package com.aipadala.android.presentation.components.common
 
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CompareArrows
 import androidx.compose.material.icons.filled.Favorite
@@ -20,12 +21,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.aipadala.android.R
 import com.aipadala.android.presentation.navigation.Screen
+import com.aipadala.android.presentation.theme.AIPadalaColors
+import com.aipadala.android.presentation.theme.Dimensions
 
 data class BottomNavItem(
     val route: String,
@@ -67,6 +74,10 @@ val bottomNavItems = listOf(
     )
 )
 
+/**
+ * Apple iOS-inspired bottom navigation (Tab Bar)
+ * Clean, minimal with subtle selection state
+ */
 @Composable
 fun AIPadalaBottomNav(
     navController: NavController,
@@ -76,9 +87,10 @@ fun AIPadalaBottomNav(
     val currentRoute = navBackStackEntry?.destination?.route
 
     NavigationBar(
-        modifier = modifier,
-        containerColor = MaterialTheme.colorScheme.surface,
-        contentColor = MaterialTheme.colorScheme.onSurface
+        modifier = modifier.height(Dimensions.BottomNavHeight),
+        containerColor = AIPadalaColors.White,
+        contentColor = AIPadalaColors.Gray500,
+        tonalElevation = 0.dp  // No elevation - Apple style uses border instead
     ) {
         bottomNavItems.forEach { item ->
             val isSelected = currentRoute == item.route
@@ -99,21 +111,25 @@ fun AIPadalaBottomNav(
                 icon = {
                     Icon(
                         imageVector = if (isSelected) item.selectedIcon else item.unselectedIcon,
-                        contentDescription = stringResource(item.titleRes)
+                        contentDescription = stringResource(item.titleRes),
+                        modifier = Modifier.height(22.dp)  // iOS tab bar icon size
                     )
                 },
                 label = {
                     Text(
                         text = stringResource(item.titleRes),
-                        style = MaterialTheme.typography.labelSmall
+                        style = MaterialTheme.typography.labelSmall.copy(
+                            fontSize = 10.sp,  // iOS tab bar label size
+                            fontWeight = if (isSelected) FontWeight.Medium else FontWeight.Normal
+                        )
                     )
                 },
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary,
-                    selectedTextColor = MaterialTheme.colorScheme.primary,
-                    unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    indicatorColor = MaterialTheme.colorScheme.primaryContainer
+                    selectedIconColor = AIPadalaColors.Primary500,
+                    selectedTextColor = AIPadalaColors.Primary500,
+                    unselectedIconColor = AIPadalaColors.Gray400,
+                    unselectedTextColor = AIPadalaColors.Gray400,
+                    indicatorColor = Color.Transparent  // No indicator - Apple style
                 )
             )
         }
